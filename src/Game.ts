@@ -4,12 +4,13 @@ import Preload from "./scenes/Preload";
 import MainMenu from "./scenes/MainMenu";
 import GameScene from "./scenes/GameScene";
 import UIScene from "./scenes/UIScene";
+import { BACKGROUND_COLOR, GAME_HEIGHT, GAME_WIDTH } from "./constants/Config";
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 1280,
-    height: 720,
-    backgroundColor: "#1b1b1b",
+    width: GAME_WIDTH,
+    height: GAME_HEIGHT,
+    backgroundColor: BACKGROUND_COLOR,
     pixelArt: true,
     parent: "game",
     scene: [Boot, Preload, MainMenu, GameScene, UIScene]

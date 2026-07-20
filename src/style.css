@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Thoughtless";
+    src: url("./assets/fonts/augiepixel.ttf") format("truetype");
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #111;
+    font-family: "Thoughtless", sans-serif;
+}
+
+canvas {
+    cursor: url("./assets/cursors/cursor.png"), auto;
+}
