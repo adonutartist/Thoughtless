@@ -9,21 +9,37 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         scene.physics.add.existing(this);
         this.cursors = scene.input.keyboard!.createCursorKeys();
         this.setScale(5);
+        this.play("player-idle");
     }
     update(){
         const body = this.body as Phaser.Physics.Arcade.Body;
         body.setVelocity(0);
+        let moving = false;
         if(this.cursors.left.isDown){
             body.setVelocityX(-this.speed);
+            moving = true;
         }
         else if(this.cursors.right.isDown){
             body.setVelocityX(this.speed);
+            moving = true;
         }
         if(this.cursors.up.isDown){
             body.setVelocityY(-this.speed);
+            moving = true;
         }
         else if(this.cursors.down.isDown){
             body.setVelocityY(this.speed);
+            moving = true;
+        }
+        if(moving){
+            if(this.anims.currentAnim?.key !== "player-walk"){
+                this.play("player-walk");
+            }
+        }
+        else{
+            if(this.anims.currentAnim?.key !== "player-idle"){
+                this.play("player-idle");
+            }
         }
     }
 }
