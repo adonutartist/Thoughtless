@@ -13,6 +13,7 @@ const config: Phaser.Types.Core.GameConfig = {
     backgroundColor: BACKGROUND_COLOR,
     pixelArt: true,
     parent: "game",
+    physics: {default: "arcade", arcade: {debug: true}},
     scene: [Boot, Preload, MainMenu, GameScene, UIScene]
 };
 
