@@ -6,6 +6,8 @@ export default class Preload extends Phaser.Scene{
     }
     preload(){
         this.load.atlas("atlas","assets/atlas/atlas.webp", "assets/atlas/atlas.json");
+        this.load.tilemapTiledJSON("forest", "assets/maps/forest.tmj");
+        this.load.image("forestTiles", "assets/tiles/forest.png");
     }
     create(){
         this.createPlayerAnimations();

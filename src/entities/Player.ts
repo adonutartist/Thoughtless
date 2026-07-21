@@ -8,7 +8,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.cursors = scene.input.keyboard!.createCursorKeys();
-        this.setScale(5);
+        this.setScale(1);
         this.play("player-idle");
     }
     update(){
