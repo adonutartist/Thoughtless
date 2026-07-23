@@ -11,18 +11,33 @@ export default class GameScene extends Phaser.Scene{
     create(){
         const map = this.make.tilemap({ key: "forest"});
         console.log(map.tilesets);
-        const tileset = map.addTilesetImage("forest", "forestTiles", 16, 16, 0, 0);
+        const tileset = map.addTilesetImage("fulltileset", "environment accessories", 16, 16, 0, 0);
         if(!tileset){
             throw new Error("couldnt load forest tileset.");
         }
-        map.layers.forEach(layer => {
-            map.createLayer(layer.name, tileset);
+        const createdLayers: Phaser.Tilemaps.TilemapLayer[] = [];
+        map.layers.forEach(layerData => {
+            const layer = map.createLayer(layerData.name, tileset);
+            createdLayers.push(layer);
         });
-        this.player = new Player(this, 128, 370);
+        createdLayers.forEach(layer => {
+            console.log("Collision enabled:", layer.layer.name);
+            if(layer.layer.properties.some(p => p.name === "collides" && p.value === true)){
+                layer.setCollisionByExclusion([-1]);
+                console.log(layer.layer.name, layer.getTilesWithin().filter(t => t.collides).length);
+                console.log(layer.layer.name, layer.layer.collideIndexes);
+            }
+        });
+        this.player = new Player(this, 90, 300);
+        createdLayers.forEach(layer => {
+            if(layer.layer.properties.some(p => p.name === "collides" && p.value === true)){
+                this.physics.add.collider(this.player, layer);
+            }
+        });
         this.rat = new Rat(this, this.player.x + 100, this.player.y);
-        this.cameras.main.setZoom(2);
+        this.cameras.main.setZoom(3);
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.setBounds(0, 200, map.widthInPixels, map.heightInPixels - 200);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     }
     update(){

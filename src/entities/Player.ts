@@ -7,6 +7,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         super(scene,x,y,"atlas","player/idle/00");
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        const body = this.body as Phaser.Physics.Arcade.Body;
+        body.setSize(10, 20);
+        body.setOffset(10, 12);
         this.setCollideWorldBounds(true);
         this.cursors = scene.input.keyboard!.createCursorKeys();
         this.setScale(1);
